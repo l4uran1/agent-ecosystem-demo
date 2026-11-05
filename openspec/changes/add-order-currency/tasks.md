@@ -13,7 +13,7 @@
 
 ## 3. orders-api (deployed last)
 
-- [ ] 3.1 (orders-api) Failing test: `POST /orders` accepts `currency` EUR or GBP, defaults to EUR and rejects anything else with 400; then implement
-- [ ] 3.2 (orders-api) Failing test: the order stores the EUR exchange rate at creation (1 for EUR); then implement
-- [ ] 3.3 (orders-api) Failing test: `orders.created` carries `currency` and `eurExchangeRate`; then implement
-- [ ] 3.4 (orders-api) Run tests, lint and build
+- [x] 3.1 (orders-api) Failing test: `POST /orders` accepts `currency` EUR or GBP, defaults to EUR and rejects anything else with 400; then implement
+- [x] 3.2 (orders-api) Failing test: the order stores the EUR exchange rate at creation (1 for EUR); then implement
+- [x] 3.3 (orders-api) Failing test: `orders.created` carries `currency` and `eurExchangeRate`; then implement
+- [x] 3.4 (orders-api) Run tests, lint and build
