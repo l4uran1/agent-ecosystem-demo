@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # shellcheck comes preinstalled on GitHub's Ubuntu runners
+      - name: Tests of bootstrap.sh and the Makefile, and shellcheck
+        run: ./bootstrap.sh tests
