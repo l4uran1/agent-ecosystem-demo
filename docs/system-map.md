@@ -1,56 +1,41 @@
 # System map
 
-<!--
-  TEMPLATE: replace the example rows (they describe a fictional company) and delete
-  these comments.
+Only contracts between services go here: what one service expects from another.
+Anything the agent can read inside a single repo (folders, stack, internals) does not.
 
-  Only contracts between services go here: what one service expects from another.
-  Anything the agent can read inside a single repo (folders, stack, internals) does not.
+Keep it true: a PR that adds, changes or removes a contract updates this file in the
+same change. An outdated map is worse than none, because the agent trusts it.
 
-  Keep it true: a PR that adds, changes or removes a contract updates this file in the
-  same change. An outdated map is worse than none, because the agent trusts it.
--->
-
-Last reviewed: <YYYY-MM-DD>
+Last reviewed: 2026-11-05
 
 ## Services
 
 | Service | What it does | Owner |
 | --- | --- | --- |
-| api | Public REST API and business logic | <team or person> |
-| auth | Login and token issuing for every service | <team or person> |
-| worker | Background jobs: emails, exports, billing runs | <team or person> |
+| orders-api | Public HTTP API: creates and returns orders | Checkout team |
+| notifier | Sends customer emails triggered by events | Checkout team |
+| invoicing | Issues invoices for every order | Finance team |
 
 ## Synchronous calls (HTTP, gRPC)
 
-| From | To | Endpoint | Notes |
-| --- | --- | --- | --- |
-| api | auth | `POST /internal/tokens/verify` | Called on every authenticated request |
-| worker | api | `GET /internal/users/{id}` | Read-only |
+None between services: they only talk through the queue.
 
 ## Queues and events
 
 | Producer | Queue / topic | Consumer | Payload | Notes |
 | --- | --- | --- | --- | --- |
-| api | `orders.created` | worker | `{orderId, userId, total}` | At-least-once: consumers must be idempotent |
+| orders-api | `orders.created` | notifier, invoicing | `{orderId, customerEmail, totalCents, createdAt}` | At-least-once: consumers must be idempotent (key: `orderId`). Amounts are integer cents, VAT included, always EUR today. Each consumer declares its own copy of the type: a change here is never caught by the compiler |
 
 ## Pub/sub channels
 
-| Publisher | Channel | Subscriber | Notes |
-| --- | --- | --- | --- |
-| worker | `user:<id>:notifications` | notifications | Fire-and-forget, no replay |
+None.
 
 ## Shared tables
 
-Tables read or written by a service other than the one that owns their schema.
-These break silently: list who depends on which columns.
-
-| Table | Owner (schema) | Used by | Columns relied on |
-| --- | --- | --- | --- |
-| `users` | api | worker | `id`, `email`, `locale` |
+None: each service keeps its own state.
 
 ## Shared infrastructure
 
 | Component | Used by | Notes |
 | --- | --- | --- |
-| Redis `sessions` | api, auth | Single point of failure for logins |
+| Local queue folder (`BREWLY_QUEUE_DIR`, default `/tmp/brewly-queue`) | orders-api, notifier, invoicing | Demo stand-in for a broker: one JSON line per message, one offset file per consumer |

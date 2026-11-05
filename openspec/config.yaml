@@ -1,6 +1,5 @@
 # openspec/config.yaml (ecosystem root)
 #
-# TEMPLATE: replace the `context` with your own and keep the `rules`.
 # If `openspec init` adds other keys to this file, keep them.
 
 schema: spec-driven
@@ -8,21 +7,22 @@ schema: spec-driven
 # Injected into everything OpenSpec generates. Keep it short: only what the agent
 # cannot work out by reading the code and that changes how a proposal is designed.
 context: |
-  Product: <one or two lines on what the product does and for whom>.
+  Product: Brewly, an online shop that sells specialty coffee from Spain to consumers.
 
   Structure: every folder in the ecosystem repo is a service repo with its own git
-  (<list the repos>). Contracts between services (queues, pub/sub channels,
-  internal endpoints, shared tables) are in docs/system-map.md.
+  (orders-api, notifier, invoicing). Contracts between services (queues, pub/sub
+  channels, internal endpoints, shared tables) are in docs/system-map.md.
 
-  Stack: <one line per group of services, without versions>.
+  Stack: TypeScript on Node 22, no runtime dependencies, node:test. Services talk only
+  through the orders.created event.
 
-  Constraints: <external limits that rule out designs, e.g. app store review,
-  third-party API quotas, regulatory requirements>.
+  Constraints: accounting rules for invoices and VAT, and the payment provider's
+  currencies, in docs/product/constraints.md.
 
   Sensitive areas: listed in docs/product/sensitive-areas.md. A mistake there
   directly hurts customers' trust.
 
-  Language: write proposals, specs and tasks in <language>.
+  Language: write proposals, specs and tasks in English.
 
 rules:
   proposal:

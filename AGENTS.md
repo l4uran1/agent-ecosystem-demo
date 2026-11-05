@@ -1,19 +1,13 @@
-# <Company> ecosystem
+# Brewly ecosystem
 
-<!--
-  TEMPLATE: fill in every <placeholder> and delete these comments.
-  Keep this file short: every line here is read by the agent in every task.
-  Only shared rules go here; build/test commands live in each repo's own AGENTS.md.
--->
-
-This folder holds the repos of every <Company> service, each with its own git, plus what
+This folder holds the repos of every Brewly service, each with its own git, plus what
 they all share: this file, `docs/` and `openspec/`. The ecosystem repo ignores the service repos:
-a change in `api/` is committed in `api/`, never in the ecosystem repo.
+a change in `orders-api/` is committed in `orders-api/`, never in the ecosystem repo.
 
 ## Ecosystem settings
 
-- Main branch of every repo: `<main>` (see `repos.txt` for exceptions).
-- Git host CLI: `<gh | glab>`. "PR" in this file means pull request or merge request.
+- Main branch of every repo: `main` (see `repos.txt` for exceptions).
+- Git host CLI: `gh`. "PR" in this file means pull request or merge request.
 - Branch names: `feature/<change-id>` for features, `fix/<short-description>` for bugs,
   `spec/<change-id>` for proposals in the ecosystem repo.
 

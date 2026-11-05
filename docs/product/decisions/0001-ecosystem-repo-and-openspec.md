@@ -1,7 +1,7 @@
 # 0001 · Shared ecosystem repo and OpenSpec as the single source of specs
 
-- Status: Proposed
-- Date: <YYYY-MM-DD>
+- Status: Accepted
+- Date: 2026-11-05
 
 ## Context
 The services live in separate repos but are tightly coupled (queues, pub/sub channels,

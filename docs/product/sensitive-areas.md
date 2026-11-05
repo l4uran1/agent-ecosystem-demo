@@ -1,35 +1,29 @@
 # Sensitive areas
 
-<!--
-  TEMPLATE: one section per area, following the example. Delete the example and these
-  comments. Keep the list short: if everything is sensitive, nothing is.
-  This is the only list of sensitive areas: AGENTS.md and openspec/config.yaml point here.
--->
-
 A mistake in these areas directly hurts customers or their trust in the product.
 **Any change in them requires an OpenSpec proposal**, however small it looks, and the
 proposal must explain the risk for users.
 
-## <Area name>
+## Invoices
 
-- **What it is:** <one line, in product terms>.
-- **Where it lives:** <services and, if useful, modules>.
-- **Why it is sensitive:** <what happens to the customer if it breaks>.
+- **What it is:** the invoice every customer receives for an order: number, amounts and VAT.
+- **Where it lives:** invoicing (all of it); orders-api decides the amounts it receives.
+- **Why it is sensitive:** an invoice is a legal record. A wrong amount, currency or VAT
+  cannot be edited once issued: it needs a corrective invoice, the accountant's time and an
+  apology to the customer.
 
-<!--
-  Example:
+## Order confirmation email
 
-  ## Payments
-
-  - **What it is:** subscription billing and invoices.
-  - **Where it lives:** api (billing module), worker (monthly billing run).
-  - **Why it is sensitive:** a mistake charges customers the wrong amount and cannot be
-    silently undone; refunds are manual.
--->
+- **What it is:** the email that confirms what the customer bought and how much they paid.
+- **Where it lives:** notifier.
+- **Why it is sensitive:** it is the customer's proof of payment until the invoice arrives.
+  A wrong total or currency makes customers think they were overcharged and floods support.
 
 ## Known risks
 
-Fragile spots found in the system that are not covered by tests. If a change touches
-them, the proposal must say how it deals with them.
-
-- **<Short name>.** <What is fragile, what would break it, and the proposed fix if any>.
+- **The `orders.created` payload is typed three times.** orders-api, notifier and
+  invoicing each declare their own `OrderCreated` type. Adding or renaming a field compiles
+  and passes every repo's tests while the consumers silently ignore it. Any change to the
+  payload must list both consumers and update them in the same change.
+- **Old events stay in the queue.** Consumers may replay events published before a
+  contract change: a new field cannot be assumed present.

@@ -1,29 +1,21 @@
 # External constraints
 
-<!--
-  TEMPLATE: one section per platform, provider or regulation that limits what you can
-  build. Delete the example and these comments.
--->
-
 Limits that do not depend on us. A proposal that clashes with them is not viable, even if
 it looks technically right.
 
-## <Platform, provider or regulation>
+## Accounting (Brewly's accountant)
 
-- <What it imposes, in one line>.
-- <What it means for a change, e.g. "adding a permission triggers a new review">.
+- Brewly is a Spanish company and every order ships from Spain: the VAT rate is the Spanish
+  standard rate, 21%, whatever the customer's currency.
+- An invoice is issued in the currency the customer paid in.
+- When that currency is not EUR, the invoice must also state the VAT amount in EUR, using
+  the exchange rate applied when the customer paid.
+- Issued invoices are never edited or deleted: mistakes are fixed with a corrective invoice.
 
-<!--
-  Example:
+## Payments provider
 
-  ## Mobile app stores
+- Brewly can only charge in EUR and GBP.
 
-  - Every release goes through App Store and Google Play review: a change in the app is
-    not immediate and cannot be rolled back instantly.
-  - New permissions require a justification in the review and prompt users again.
+## Privacy
 
-  ## Privacy
-
-  - Personal data must never appear in logs.
-  - Exports are kept for 30 days, then deleted.
--->
+- Customer emails must never appear in logs outside the demo console output.
