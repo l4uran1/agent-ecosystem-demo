@@ -1,9 +1,9 @@
 ## 1. invoicing (deployed first)
 
-- [ ] 1.1 (invoicing) Failing test: an event without `currency` still gets an EUR invoice, exactly as today; then make the event type accept the new optional fields
-- [ ] 1.2 (invoicing) Failing test: a GBP event gets a GBP invoice with net and 21% VAT in GBP; then implement
-- [ ] 1.3 (invoicing) Failing test: a non-EUR invoice also states the VAT in EUR using the event's exchange rate, and an EUR invoice does not; then implement and print it
-- [ ] 1.4 (invoicing) Run tests, lint and build
+- [x] 1.1 (invoicing) Failing test: an event without `currency` still gets an EUR invoice, exactly as today; then make the event type accept the new optional fields
+- [x] 1.2 (invoicing) Failing test: a GBP event gets a GBP invoice with net and 21% VAT in GBP; then implement
+- [x] 1.3 (invoicing) Failing test: a non-EUR invoice also states the VAT in EUR using the event's exchange rate, and an EUR invoice does not; then implement and print it
+- [x] 1.4 (invoicing) Run tests, lint and build
 
 ## 2. notifier (deployed second)
 
