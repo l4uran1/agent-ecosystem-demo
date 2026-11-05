@@ -7,9 +7,9 @@
 
 ## 2. notifier (deployed second)
 
-- [ ] 2.1 (notifier) Failing test: `formatMoney` uses the currency's symbol (€, £); then implement
-- [ ] 2.2 (notifier) Failing test: the email shows the total in the event's currency, and in EUR when the event has none; then implement
-- [ ] 2.3 (notifier) Run tests, lint and build
+- [x] 2.1 (notifier) Failing test: `formatMoney` uses the currency's symbol (€, £); then implement
+- [x] 2.2 (notifier) Failing test: the email shows the total in the event's currency, and in EUR when the event has none; then implement
+- [x] 2.3 (notifier) Run tests, lint and build
 
 ## 3. orders-api (deployed last)
 
