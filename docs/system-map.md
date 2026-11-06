@@ -24,7 +24,7 @@ None between services: they only talk through the queue.
 
 | Producer | Queue / topic | Consumer | Payload | Notes |
 | --- | --- | --- | --- | --- |
-| orders-api | `orders.created` | notifier, invoicing | `{orderId, customerEmail, totalCents, createdAt}` | At-least-once: consumers must be idempotent (key: `orderId`). Amounts are integer cents, VAT included, always EUR today. Each consumer declares its own copy of the type: a change here is never caught by the compiler |
+| orders-api | `orders.created` | notifier, invoicing | `{orderId, customerEmail, totalCents, currency, eurExchangeRate, createdAt}` | At-least-once: consumers must be idempotent (key: `orderId`). `totalCents` is in minor units of `currency` (`EUR` or `GBP`), VAT included. `eurExchangeRate` is EUR per one unit of `currency`, fixed at checkout. Events published before `add-order-currency` have neither field: consumers treat them as EUR with rate 1. Each consumer declares its own copy of the type: a change here is never caught by the compiler |
 
 ## Pub/sub channels
 
